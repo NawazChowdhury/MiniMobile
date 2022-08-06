@@ -7,17 +7,13 @@
 			<div class="row">
 			<div class="col-md-2">
 				
-				<form action="">
+				<form action="" method="get">
 					 <div class="form-group">
-					    <input type="text" name="p_name" class="form-control" placeholder="Product Name">
+					    <input type="text" name="search" class="form-control" placeholder="Product Name">
 
 					  </div>
 
-					   <div class="form-group">
-					  	<br>
-					    <input type="number" name="p_price" class="form-control" placeholder="Product Price">
-
-					  </div>
+					  
 
 					   <div class="form-group">
 					   	<br>
@@ -34,20 +30,50 @@
 			
 			
 
-			<?php for($i=1;$i<=12;$i++){  ?>
-			<div class=" col-md-3">
+					 <?php 
+
+                                            include('inc/db_connect.php'); 
+
+                                            if(isset($_GET['search'])){
+                                            	  $sql = "SELECT * FROM tbl_product WHERE p_name LIKE '%".$_GET['search']."%' OR p_description LIKE '%".$_GET['search']."%' OR p_price LIKE '%".$_GET['search']."%'";
+                                            	}else{
+
+                                            		  $sql = "SELECT * FROM tbl_product";
+                                            	}
+
+                                          
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                              // output data of each row
+                                              while($row = $result->fetch_assoc()) {  ?> 
+
+                                      
+
+                                                <div class=" col-md-3">
 				<div class="card col-md-12 products">
 				
-				  <img src="img/4.jpg"  style="padding: 10px;" class="card-img-top" alt="Mobile Image">
+				  <img src="<?=$row['p_image']?>"  style="padding: 10px;height:300px;" class="card-img-top" alt="<?=$row['p_name']?>">
 				  <div class="card-body">
-				    <h5 class="card-title">Samsung Mobile</h5>
-				    <p><b>Price $290 CAD</b></p>
-				    <p class="card-text">Samsung s21 latest mobile with</p>
-				    <a href="detail.php" class="btn btn-primary">View Detail</a>
+				    <h5 class="card-title"><?=$row['p_name']?></h5>
+				    <p><b>Price <?=$row['p_price']?> CAD</b></p>
+				    <p class="card-text"><?=substr($row['p_description'],0,50)?>...</p>
+				    <a href="detail.php?id=<?=$row['p_id']?>" class="btn btn-primary">View Detail</a>
 				  </div>
 				  </div>
 			</div>
-			<?php } ?>
+
+                                                
+                                             <?php 
+                                                 }
+                                                } else {
+                                                 // echo "0 results";
+                                                }
+                                            $conn->close();
+
+
+                                        ?>
+			
 	
 
 

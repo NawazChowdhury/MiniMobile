@@ -97,7 +97,7 @@
 		        ?>
 
 		        	<li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="#">Cart <span class="badge bg-secondary"><?=$cart?></span></a>
+		          <a class="nav-link active" aria-current="page" href="cart.php?id=<?=$order_id?>">Cart <span class="badge bg-secondary"><?=$cart?></span></a>
 		        </li>
 
 		        <li class="nav-item">

@@ -158,6 +158,10 @@ if($validation&&$_SERVER["REQUEST_METHOD"] == "POST"){
 					  </div>
 					 
 					  <button type="submit" class="btn btn-primary">Signup Now</button>
+
+					  <br>
+					  <br>
+					  <p>Do you have account already? <a href="login.php">Login</a> </p>
 					</form>
 					</div>
 

@@ -47,6 +47,16 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 View Products
                             </a>
+
+                            <a class="nav-link" href="view_pending.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-history"></i></div>
+                                View Pending
+                            </a>
+
+                            <a class="nav-link" href="view_dispatch.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-shipping-fast"></i></i></div>
+                                View Dispatched
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
