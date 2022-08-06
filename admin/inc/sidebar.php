@@ -34,12 +34,18 @@
                                 Dashboard
                             </a>
                             <div class="sb-sidenav-menu-heading">Functionality</div>
+
+
+                            <a class="nav-link" href="view_user.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                View User
+                            </a>
                            
                             <a class="nav-link" href="add_product.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Add Products
                             </a>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="view_product.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 View Products
                             </a>

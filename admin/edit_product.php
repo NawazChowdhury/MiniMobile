@@ -3,9 +3,37 @@
 
 
 <?php
-// define variables and set to empty values
+
 $p_nameErr =$p_descriptionErr = $p_priceErr =  $p_qtyErr= $fileErr="";
-$p_name= $p_description = $p_price =$p_qty =  $success="";
+$p_name= $p_description = $p_price =$p_qty =  $success= $image_path="";
+
+
+// define variables and set to empty values
+   include('inc/db_connect.php');
+
+$sql = "SELECT * FROM tbl_product WHERE p_id='".$_GET['id']."'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+// output data of each row
+while($row = $result->fetch_assoc()) {
+
+  $p_name=$row['p_name'];
+  $p_description = $row['p_description'];
+  $p_price =$row['p_price'];
+  $p_qty =  $row['p_qty'];
+  $image_path =  $row['p_image'];
+
+}
+} else {
+echo "0 results";
+}
+
+
+
+
+
+
 
 $validation= true;
 $uploadOk=0;
@@ -67,6 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
 
+if(!empty($_FILES)){
 
 $target_dir = "../image/";
 $saveDb="image/";
@@ -113,8 +142,13 @@ if ($uploadOk == 0) {
 
     // Check if file already exists
 if (file_exists($target_file)) {
+
+
   
-    
+    unlink('../'.$image_path);
+
+
+
 /* create new name file */
 $filename   = uniqid() . "-" . time(); // 5dab1961e93a7-1571494241
 $extension  = pathinfo( $_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION ); // jpg
@@ -130,6 +164,9 @@ $saveImageDb=$saveDb.$basename;
 
 
 }else{
+
+  
+     unlink('../'.$image_path);
 
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
    // echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
@@ -150,6 +187,8 @@ $saveImageDb=$saveDb.$basename;
 
 }
 
+}
+
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -159,15 +198,23 @@ function test_input($data) {
 
 
 
-if($validation&&$uploadOk&&$_SERVER["REQUEST_METHOD"] == "POST"){
+if($validation&&$_SERVER["REQUEST_METHOD"] == "POST"){
 
     
     include('inc/db_connect.php');
 
+if(!empty($_FILES)){
+
+    $sql = "UPDATE tbl_product SET p_name ='".$p_name."', p_price ='".$p_price."', p_description='".$p_description."',p_image='".$saveImageDb."',p_qty='".$p_qty."' WHERE p_id='".$_GET['id']."'";
+
+  //  echo $sql;
 
 
-    $sql = "INSERT INTO tbl_product (p_name, p_price, p_description,p_image,p_qty)
-    VALUES ('".$p_name."', '".$p_price."', '".$p_description."', '".$saveImageDb."', '".$p_qty."')";
+}else{
+   $sql = "UPDATE tbl_product SET p_name ='".$p_name."', p_price ='".$p_price."', p_description='".$p_description."',p_qty='".$p_qty."' WHERE p_id='".$_GET['id']."'";
+
+  // echo $sql;
+}
 
     if ($conn->query($sql) === TRUE) {
       
@@ -175,7 +222,9 @@ if($validation&&$uploadOk&&$_SERVER["REQUEST_METHOD"] == "POST"){
 
         //echo 'Added Successfully';
 
-        $success="Product Added Successfully!!!";
+        $success="Product Updated Successfully!!!";
+     
+        header('Location: '.$_SERVER['REQUEST_URI'].'');
 
     } else {
       echo "Error: " . $sql . "<br>" . $conn->error;
@@ -193,9 +242,9 @@ if($validation&&$uploadOk&&$_SERVER["REQUEST_METHOD"] == "POST"){
       
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-6">Add Product</h1>
+                        <h1 class="mt-6">Update Product</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Add Product To Database</li>
+                            <li class="breadcrumb-item active">Update Product To Database</li>
                         </ol>
                         <div class="row">
 
@@ -203,7 +252,7 @@ if($validation&&$uploadOk&&$_SERVER["REQUEST_METHOD"] == "POST"){
                                 <?php if($success){ ?>
                                  <div class="col-md-12 alert alert-success"><?=$success?></div>
                                 <?php } ?> 
-                                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
+                                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>?id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">
                                     
 
                                 <div class="form-group">
@@ -255,8 +304,16 @@ if($validation&&$uploadOk&&$_SERVER["REQUEST_METHOD"] == "POST"){
                                      <br>
                                 </div>
 
+                                <div class="form-group">
+                                  
+                                  <img src="../<?=$image_path?>" style="width:80px;height:100px;"alt="">
+                                  <br>
+                                  <br>
 
-                                <button type="submit" class="btn btn-primary">Add Now</button>
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary">Update Now</button>
                                 
                                 </form>
 
