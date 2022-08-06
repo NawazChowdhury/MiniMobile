@@ -74,6 +74,7 @@ if($validation&&$_SERVER["REQUEST_METHOD"] == "POST"){
 
 	  		$_SESSION['user_type']=$row["type"];
 	  		$_SESSION['user_name']=$row["name"];
+	  		$_SESSION['user_id']=$row["id"];
 
 	  		header("Location: admin/index.php");
 
@@ -84,6 +85,7 @@ if($validation&&$_SERVER["REQUEST_METHOD"] == "POST"){
 
 	  		$_SESSION['user_type']=$row["type"];
 			$_SESSION['user_name']=$row["name"];
+			$_SESSION['user_id']=$row["id"];
 
 
 			header("Location: index.php");

@@ -1,4 +1,4 @@
-<?php  include('inc/header.php'); ?>
+<?php  include('inc/header.php');  ?>
 
 
 	<div class="body-area">
@@ -11,9 +11,19 @@
 			<div class=" col-md-12">
 				<div class="card col-md-12 products">
 					<div class="row">
+<?php 
+
+						  include('inc/db_connect.php'); 
+
+                                            $sql = "SELECT * FROM tbl_product WHERE p_id='".$_GET['id']."'";
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                              // output data of each row
+                                              while($row = $result->fetch_assoc()) {   ?>
 					<div class="col-md-4">
 				
-				 		 <img src="img/4.jpg"  style="padding: 10px;max-height: " class="card-img-top" alt="Mobile Image">
+				 		 <img src="<?=$row['p_image']?>"  style="padding: 10px;max-height: " class="card-img-top" alt="Mobile Image">
 
 				  	</div>
 
@@ -27,15 +37,12 @@
 
 			 <?php 
 
-                                            include('inc/db_connect.php'); 
+			 $success="Order Added Successfully!!";
 
-                                            $sql = "SELECT * FROM tbl_product WHERE p_id='".$_GET['id']."'";
-                                            $result = $conn->query($sql);
-
-                                            if ($result->num_rows > 0) {
-                                              // output data of each row
-                                              while($row = $result->fetch_assoc()) {  ?> 
-
+                                           ?> 
+								                <?php if(isset($_GET['add'])){ ?>
+													<div class="col-md-12 alert alert-success"><?=$success?></div>
+												<?php } ?> 
 
                                               	 	<h2> <?=$row['p_name']?></h2>
 												     
@@ -124,7 +131,7 @@
 
                                             include('inc/db_connect.php'); 
 
-                                            $sql = "SELECT * FROM tbl_product LIMIT 20";
+                                            $sql = "SELECT * FROM tbl_product  ORDER BY RAND() LIMIT 4";
                                             $result = $conn->query($sql);
 
                                             if ($result->num_rows > 0) {
@@ -136,7 +143,7 @@
                                                 <div class=" col-md-3">
 				<div class="card col-md-12 products">
 				
-				  <img src="<?=$row['p_image']?>"  style="padding: 10px;" class="card-img-top" alt="<?=$row['p_name']?>">
+				  <img src="<?=$row['p_image']?>"  style="padding: 10px;height:300px;" class="card-img-top" alt="<?=$row['p_name']?>">
 				  <div class="card-body">
 				    <h5 class="card-title"><?=$row['p_name']?></h5>
 				    <p><b>Price <?=$row['p_price']?> CAD</b></p>

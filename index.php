@@ -26,7 +26,7 @@
                                                 <div class=" col-md-3">
 				<div class="card col-md-12 products">
 				
-				  <img src="<?=$row['p_image']?>"  style="padding: 10px;" class="card-img-top" alt="<?=$row['p_name']?>">
+				  <img src="<?=$row['p_image']?>"  style="padding: 10px;height:300px;" class="card-img-top" alt="<?=$row['p_name']?>">
 				  <div class="card-body">
 				    <h5 class="card-title"><?=$row['p_name']?></h5>
 				    <p><b>Price <?=$row['p_price']?> CAD</b></p>
