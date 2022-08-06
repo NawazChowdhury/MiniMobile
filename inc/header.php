@@ -63,6 +63,43 @@
 		          <a class="nav-link active" aria-current="page" href="#"><?=$_SESSION['user_name']?></a>
 		        </li>
 
+		        <?php  
+
+		        	include('inc/db_connect.php');
+
+		        	$cart=0;
+		        	$order_id=0;
+
+		        	$sql = "SELECT * FROM tbl_order WHERE user_id='".$_SESSION['user_id']."' AND o_status='0'";
+					$result = $conn->query($sql);
+
+					if ($result->num_rows > 0) {
+					// output data of each row
+					while($row = $result->fetch_assoc()) { 
+						$order_id=$row['o_id'];
+					}
+					} 
+
+
+					$sql = "SELECT COUNT(od_id) AS c FROM tbl_order_detail WHERE o_id='".$order_id."'";
+
+					//echo $sql; exit;
+					$result = $conn->query($sql);
+
+					if ($result->num_rows > 0) {
+					// output data of each row
+					while($row = $result->fetch_assoc()) { 
+						$cart=$row['c'];
+					}
+					} 
+
+
+		        ?>
+
+		        	<li class="nav-item">
+		          <a class="nav-link active" aria-current="page" href="#">Cart <span class="badge bg-secondary"><?=$cart?></span></a>
+		        </li>
+
 		        <li class="nav-item">
 		          <a class="nav-link active" aria-current="page" href="logout.php">Logout</a>
 		        </li>

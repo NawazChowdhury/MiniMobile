@@ -12,10 +12,11 @@
 	$sql = "SELECT * FROM tbl_order WHERE user_id='".$_SESSION['user_id']."' AND o_status='0'";
 	$result = $conn->query($sql);
 
+
 	if ($result->num_rows > 0) {
 	// output data of each row
 	while($row = $result->fetch_assoc()) { 
-		$order_id=$row['order_id'];
+		$order_id=$row['o_id'];
 	}
 	}else{
 
