@@ -31,7 +31,7 @@
 
                                             include('inc/db_connect.php'); 
 
-                                            $sql = "SELECT * FROM tbl_user,tbl_order WHERE tbl_user.id=tbl_order.user_id AND o_status=0";
+                                            $sql = "SELECT * FROM tbl_user,tbl_order WHERE tbl_user.id=tbl_order.user_id AND o_status=0 ORDER BY o_id DESC";
 
                                             $result = $conn->query($sql);
 

@@ -3,12 +3,11 @@
 
 	<div class="body-area">
 		<div class="container">
-			<h2 class="text-center"><br>Login</h2>
+			<h2 class="text-center"><br>Contact US</h2>
 			<div class="row">
 				
 
-			 <h3>Contact US</h3>
-
+			 
 			 <h5>
  
 				
@@ -19,11 +18,16 @@
 			    Toronto, Ontario<br>
 			    Canada<br>
 
-			    Mobile: 437-882-9678
-			    <br>
+			    
 
 			</h5>
 
+			   <div class="col-md-12"> 
+					<br>
+					<br>
+					<br>
+					<br>
+			   </div>
 
 
 			</div>

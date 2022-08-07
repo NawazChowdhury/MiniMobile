@@ -6,7 +6,7 @@
       
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">View pending Order</h1>
+                        <h1 class="mt-4">View Dispatch Order</h1>
                         
                         <div class="row">
 
@@ -31,7 +31,7 @@
 
                                             include('inc/db_connect.php'); 
 
-                                            $sql = "SELECT * FROM tbl_user,tbl_order WHERE tbl_user.id=tbl_order.user_id AND o_status=1";
+                                            $sql = "SELECT * FROM tbl_user,tbl_order WHERE tbl_user.id=tbl_order.user_id AND o_status=1 ORDER BY o_id DESC";
 
                                             $result = $conn->query($sql);
 

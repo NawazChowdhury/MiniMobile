@@ -60,7 +60,7 @@
 		        </li>
 		        <?php if(isset($_SESSION['user_type'])){ ?>
 					<li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="#"><?=$_SESSION['user_name']?></a>
+		          <a class="nav-link active" aria-current="page" href="<?php if($_SESSION['user_type']=='admin'){ echo 'admin/index.php'; }else{ echo '#'; } ?>"><?=$_SESSION['user_name']?></a>
 		        </li>
 
 		        <?php  
