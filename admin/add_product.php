@@ -164,7 +164,12 @@ if($validation&&$uploadOk&&$_SERVER["REQUEST_METHOD"] == "POST"){
     
     include('inc/db_connect.php');
 
-
+    $p_description=nl2br($p_description);
+    
+   
+    
+    $substringsToRemove = ['\'', '"'];
+    $p_description = str_replace($substringsToRemove, "", $p_description);
 
     $sql = "INSERT INTO tbl_product (p_name, p_price, p_description,p_image,p_qty)
     VALUES ('".$p_name."', '".$p_price."', '".$p_description."', '".$saveImageDb."', '".$p_qty."')";
@@ -229,7 +234,7 @@ if($validation&&$uploadOk&&$_SERVER["REQUEST_METHOD"] == "POST"){
 
                                   <div class="form-group">
 
-                                    <textarea name="p_description"  class="form-control"  placeholder="Enter Product Description"><?=$p_description?></textarea>
+                                    <textarea name="p_description"  class="form-control"  placeholder="Enter Product Description"><?=strip_tags($p_description)?></textarea>
 
                             
                                     <span class="error"><?=$p_descriptionErr?></span>

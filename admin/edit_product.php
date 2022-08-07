@@ -19,7 +19,8 @@ if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
 
   $p_name=$row['p_name'];
-  $p_description = $row['p_description'];
+  $p_description =strip_tags($row['p_description']);
+  $p_description =stripslashes($p_description);
   $p_price =$row['p_price'];
   $p_qty =  $row['p_qty'];
   $image_path =  $row['p_image'];
@@ -203,7 +204,14 @@ if($validation&&$_SERVER["REQUEST_METHOD"] == "POST"){
     
     include('inc/db_connect.php');
 
-if(!empty($_FILES)){
+        
+  
+    
+    $substringsToRemove = ['\'', '"'];
+    $p_description = str_replace($substringsToRemove, "", $p_description);
+    $p_description = nl2br($p_description);
+
+if($_FILES["fileToUpload"]["name"]){
 
     $sql = "UPDATE tbl_product SET p_name ='".$p_name."', p_price ='".$p_price."', p_description='".$p_description."',p_image='".$saveImageDb."',p_qty='".$p_qty."' WHERE p_id='".$_GET['id']."'";
 
@@ -224,7 +232,15 @@ if(!empty($_FILES)){
 
         $success="Product Updated Successfully!!!";
      
-        header('Location: '.$_SERVER['REQUEST_URI'].'');
+       // header('Location: '.$_SERVER['REQUEST_URI'].'');
+
+        echo '<script src="/javascripts/application.js" type="text/javascript" charset="utf-8" async defer>\
+
+setTimeout(() => {
+  document.location.reload('.$_SERVER['REQUEST_URI'].');
+}, 3000);
+
+        </script>';
 
     } else {
       echo "Error: " . $sql . "<br>" . $conn->error;
@@ -278,7 +294,7 @@ if(!empty($_FILES)){
 
                                   <div class="form-group">
 
-                                    <textarea name="p_description"  class="form-control"  placeholder="Enter Product Description"><?=$p_description?></textarea>
+                                    <textarea name="p_description"  class="form-control"  placeholder="Enter Product Description"><?=strip_tags($p_description)?></textarea>
 
                             
                                     <span class="error"><?=$p_descriptionErr?></span>

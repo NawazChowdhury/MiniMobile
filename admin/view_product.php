@@ -32,12 +32,12 @@
 
                                             include('inc/db_connect.php'); 
 
-                                            $sql = "SELECT * FROM tbl_product";
+                                            $sql = "SELECT * FROM tbl_product ORDER BY p_id DESC";
                                             $result = $conn->query($sql);
 
-                                            if ($result->num_rows > 0) {
+                                            if ($result->num_rows > 0) { $count=1;
                                               // output data of each row
-                                              while($row = $result->fetch_assoc()) { $count=1; ?> 
+                                              while($row = $result->fetch_assoc()) {  ?> 
 
                                                  <tr>
                                                     <td><?=$count?></td>

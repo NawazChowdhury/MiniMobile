@@ -12,7 +12,7 @@
 						<li><a href="index.php"><i ></i>Home</a></li>
 						<li><a href="products.php"><i ></i>Shop</a></li>
 						<li><a href="about.php"><i ></i>About</a></li>
-						<li><a href="contact"><i ></i>Contact</a></li>
+						<li><a href="contact.php"><i ></i>Contact</a></li>
 					</ul>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-4">
