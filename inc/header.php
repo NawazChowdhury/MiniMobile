@@ -53,10 +53,10 @@
 
 
 		        <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="#">About Us</a>
+		          <a class="nav-link active" aria-current="page" href="about.php">About Us</a>
 		        </li>
 		         <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="#">Contact</a>
+		          <a class="nav-link active" aria-current="page" href="contact.php">Contact</a>
 		        </li>
 		        <?php if(isset($_SESSION['user_type'])){ ?>
 					<li class="nav-item">
